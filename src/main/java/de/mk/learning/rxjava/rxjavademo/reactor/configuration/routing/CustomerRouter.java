@@ -23,6 +23,10 @@ public class CustomerRouter {
                 .andRoute(
                         GET("/customer/id/{cid}")
                                 .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
-                        handler::getCustomerById);
+                        handler::getCustomerById)
+                .andRoute(
+                        GET("memory"),
+                        handler::getMemory);
+
     }
 }
