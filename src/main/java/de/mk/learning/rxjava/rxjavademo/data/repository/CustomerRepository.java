@@ -2,6 +2,7 @@ package de.mk.learning.rxjava.rxjavademo.data.repository;
 
 
 import de.mk.learning.rxjava.rxjavademo.data.model.Customer;
+import de.mk.learning.rxjava.rxjavademo.data.model.Notes;
 import io.reactivex.Flowable;
 import org.davidmoten.rx.jdbc.Database;
 import org.davidmoten.rx.jdbc.pool.DatabaseType;
@@ -29,6 +30,7 @@ public class CustomerRepository {
 //                        .build();
 
         //this.db = Database.from(pool);
+        // TODO: Das ggf dann noch raus extrahieren da wir einen Pool nutzen... den können wir dann in anderen Repositories nutzen :-)
         this.db = Database.nonBlocking()
                 .url("jdbc:h2:C:/Projekte/Learning/Spring/rxjava/db/Customer.db;MV_STORE=false")
                 .maxIdleTime(30, TimeUnit.MINUTES)
@@ -83,5 +85,26 @@ public class CustomerRepository {
 
         // Convert the "Reactive List" e.g Flowable into a mono since we only return one entry
         return Mono.from(customerFlowable);
+    }
+
+    // TODO: Das gehört dann in eigene Repository Klasse, wenn DB heraus refakturiert ist
+    public Flux<Notes> getAllNotes() {
+        //language=H2
+        String query = "SELECT * from NOTES";
+
+        Flowable<Notes> notesFlowable =
+                // DB Liest row für row und Flowable gibt dann diese Row d.h. Customer als Stream weiter :-) das geht dann an den Controller
+                this.db.select(query)
+                        .get(
+                                rs -> {
+                                    Notes note = new Notes();
+                                    note.setId(rs.getLong("N_ID"));
+                                    note.setNote(rs.getString("NOTE"));
+
+                                    return note;
+                                });
+
+        // Convert the Flowable into a Flux :-) that will do the trick
+        return Flux.from(notesFlowable);
     }
 }
