@@ -18,7 +18,8 @@ public class CustomerRouter {
     @Bean
     public RouterFunction<ServerResponse> route(CustomerHandler handler) {
         return RouterFunctions.route(
-                GET("/customers").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+//                GET("/customers").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+                GET("/customers").and(RequestPredicates.accept(new MediaType("application", "stream+json"))),
                 handler::getAllCustomers)
                 .andRoute(
                         GET("/customer/id/{cid}")
