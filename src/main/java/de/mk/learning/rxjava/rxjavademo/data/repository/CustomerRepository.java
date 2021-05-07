@@ -23,7 +23,7 @@ public class CustomerRepository {
     public CustomerRepository() throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:h2:C:/Projekte/Learning/Spring/rxjava/db/Customer.db;MV_STORE=false");
 
-//        NonBlockingConnectionPool pool =
+        //        NonBlockingConnectionPool pool =
 //                Pools.nonBlocking()
 //                        .maxPoolSize(Runtime.getRuntime().availableProcessors() * 5)
 //                        .connectionProvider(ConnectionProvider.from(connection))

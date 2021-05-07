@@ -20,7 +20,7 @@ public class CustomerRouter {
         return RouterFunctions.route(
 //                GET("/customers").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
                 GET("/customers").and(RequestPredicates.accept(new MediaType("application", "stream+json"))),
-                handler::getAllCustomers)
+                request -> handler.getAllCustomers(request))
                 .andRoute(
                         GET("/customer/id/{cid}")
                                 .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
