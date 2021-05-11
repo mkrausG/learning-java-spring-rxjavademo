@@ -23,11 +23,25 @@
             <version>2.4.5</version>
         </dependency>
 
+        <!-- RXJava jdbc 1 https://mvnrepository.com/artifact/com.github.davidmoten/rxjava-jdbc -->
         <dependency>
             <groupId>com.github.davidmoten</groupId>
-            <artifactId>rxjava2-jdbc</artifactId>
-            <version>0.2.7</version>
+            <artifactId>rxjava-jdbc</artifactId>
+            <version>0.7.17</version>
         </dependency>
+        <!-- Needed for rxjava 1 and flux reactor 2 ... 3 -->
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava-reactive-streams</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <!-- RxJava jdbc 2 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.davidmoten</groupId>-->
+        <!--            <artifactId>rxjava2-jdbc</artifactId>-->
+        <!--            <version>0.2.7</version>-->
+        <!--        </dependency>-->
 
         <!--        &lt;!&ndash;IMPORTANT!!! ADD THIS DEPENDENCY TO SOLVE HttpMediaNotAcceptableException&ndash;&gt;-->
         <!--        <dependency>-->
